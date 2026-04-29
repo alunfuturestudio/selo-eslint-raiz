@@ -27,7 +27,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@guilhermesilveira/selo": "^0.0.1"
+    "@guilhermesilveira/selo": "^0.1.0"
   },
   "dependencies": {
     "@typescript-eslint/parser": "^8.59.1",

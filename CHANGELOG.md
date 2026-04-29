@@ -4,7 +4,11 @@ All notable changes to `selo-eslint-raiz` are documented here. The format follow
 
 ## [Unreleased]
 
-_Nothing yet._
+## [0.1.0] — 2026-04-29
+
+### Changed
+
+- **Peer dependency** — `@guilhermesilveira/selo` peer range moved from `^0.0.1` to `^0.1.0`. Required to pick up the count-rule ratchet fix and the arrived-state goal-clamp.
 
 ## [0.0.1] — Initial release
 
