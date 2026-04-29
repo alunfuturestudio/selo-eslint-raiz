@@ -85,6 +85,24 @@ That's it — no extra wiring, no schema declaration. The seal message gets `{{l
 
 The shim only registers the rule, not the plugin that defines it. To wrap a community-plugin rule, the pattern is the same but you need to load the plugin into the shim's `Linter` instance. That's a small extension to `shimEslintRule()` (add a `plugin` + `pluginName` option, register it in the `verify()` config). This is intentionally out of scope for `eslint-raiz` — keeping this pack core-only avoids dragging external plugin deps into selo's tree. If you need to wrap a plugin rule, fork the helper or build a separate `selo-eslint-<plugin>-raiz` pack.
 
+## Releasing
+
+Manual SemVer release flow. See [@guilhermesilveira/selo's release notes](https://github.com/guilhermesilveira/selo#releasing) for the engine-releases-first ordering — when `@guilhermesilveira/selo`'s contract changes, the engine ships first, then this pack bumps its peer range and follows.
+
+```sh
+# 1. Move [Unreleased] in CHANGELOG.md under a new
+#    `## [<version>] — YYYY-MM-DD` heading.
+# 2. If the engine bumped, update peerDependencies."@guilhermesilveira/selo"
+#    in package.json.
+# 3. npm version patch        # 0.0.1 → 0.0.2 (or `minor` / `major`)
+# 4. git push --follow-tags
+# 5. npm publish               # one-time `npm login` first
+```
+
+The `prepublishOnly` script gates publishing on a clean build + tests + lint, so a broken state can't ship.
+
+---
+
 ## Layout
 
 ```
