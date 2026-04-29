@@ -1,0 +1,46 @@
+{
+  "name": "selo-eslint-raiz",
+  "version": "0.0.1",
+  "description": "selo rule pack — three core ESLint rules wrapped for the selo contract (no-empty, no-useless-catch, object-curly-newline). Ships a shimEslintRule() helper so the same pattern can be applied to any other ESLint rule.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./shim": {
+      "types": "./dist/lib/shim.d.ts",
+      "import": "./dist/lib/shim.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "lint": "eslint src tests",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@guilhermesilveira/selo": "^0.0.1"
+  },
+  "dependencies": {
+    "@typescript-eslint/parser": "^8.59.1",
+    "eslint": "^9.39.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@guilhermesilveira/selo": "github:guilhermesilveira/selo",
+    "@types/node": "^22.7.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.59.1",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
