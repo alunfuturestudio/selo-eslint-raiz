@@ -1,3 +1,4 @@
+import type { SeloRule } from '@guilhermesilveira/selo';
 import { shimEslintRule } from '../lib/shim.js';
 
 /**
@@ -8,7 +9,7 @@ import { shimEslintRule } from '../lib/shim.js';
  * to gather noise (one extra import per PR review round). Forcing one
  * line per import keeps the source diffs clean.
  */
-export const eslintObjectCurlyNewline = shimEslintRule({
+export const eslintObjectCurlyNewline: SeloRule = shimEslintRule({
   id: 'eslint/object-curly-newline-imports',
   description: 'Require single-line `import { … }` declarations.',
   unitLabel: 'multiline-imports',

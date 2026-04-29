@@ -1,3 +1,4 @@
+import type { SeloRule } from '@guilhermesilveira/selo';
 import { shimEslintRule } from '../lib/shim.js';
 
 /**
@@ -8,7 +9,7 @@ import { shimEslintRule } from '../lib/shim.js';
  * the error is being swallowed. We pass `allowEmptyCatch: false` to keep
  * that behavior strict.
  */
-export const eslintNoEmpty = shimEslintRule({
+export const eslintNoEmpty: SeloRule = shimEslintRule({
   id: 'eslint/no-empty',
   description: 'Forbid empty block statements (functions, if/else, for/while bodies, catch).',
   unitLabel: 'empty-blocks',

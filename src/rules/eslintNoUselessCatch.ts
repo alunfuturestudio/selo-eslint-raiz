@@ -1,3 +1,4 @@
+import type { SeloRule } from '@guilhermesilveira/selo';
 import { shimEslintRule } from '../lib/shim.js';
 
 /**
@@ -8,7 +9,7 @@ import { shimEslintRule } from '../lib/shim.js';
  * remove the try/catch entirely — letting the exception propagate is
  * almost always better than catching it just to re-throw.
  */
-export const eslintNoUselessCatch = shimEslintRule({
+export const eslintNoUselessCatch: SeloRule = shimEslintRule({
   id: 'eslint/no-useless-catch',
   description: 'Forbid `catch (e) { throw e; }` — pointless re-throw that hides the original stack.',
   unitLabel: 'useless-catches',
