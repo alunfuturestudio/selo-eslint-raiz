@@ -1,6 +1,6 @@
 {
   "name": "selo-eslint-raiz",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "selo rule pack — three core ESLint rules wrapped for the selo contract (no-empty, no-useless-catch, object-curly-newline). Ships a shimEslintRule() helper so the same pattern can be applied to any other ESLint rule.",
   "type": "module",
   "main": "./dist/index.js",
