@@ -1,16 +1,17 @@
 # selo-eslint-raiz
 
-A `selo` rule pack that wraps three core ESLint rules into the selo contract, plus a generic `shimEslintRule()` helper so you can wrap any other ESLint rule the same way. Companion to [`@guilhermesilveira/selo`](https://github.com/guilhermesilveira/selo).
+A `selo` rule pack that wraps four core ESLint rules into the selo contract, plus a generic `shimEslintRule()` helper so you can wrap any other ESLint rule the same way. Companion to [`@guilhermesilveira/selo`](https://github.com/guilhermesilveira/selo).
 
 ## Rules
 
 | Rule id | Wraps | What it catches |
 |---|---|---|
 | `eslint/no-empty` | core `no-empty` (with `allowEmptyCatch: false`) | empty `{}` blocks, including empty catch clauses |
+| `eslint/no-nested-ternary` | core `no-nested-ternary` | ternary expressions nested inside another ternary |
 | `eslint/no-useless-catch` | core `no-useless-catch` | `catch (e) { throw e; }` patterns that hide nothing and serve no purpose |
 | `eslint/object-curly-newline-imports` | core `object-curly-newline` (with `ImportDeclaration: 'never'`) | multi-line `import { ... }` declarations |
 
-All three are **count rules** under the selo contract: each violation produces one `value: 1` measurement. Histograms aren't meaningful for them; ratchet works on `violationsVsGoal` (count) only.
+All four are **count rules** under the selo contract: each violation produces one `value: 1` measurement. Histograms aren't meaningful for them; ratchet works on `violationsVsGoal` (count) only.
 
 ## Install
 
@@ -29,13 +30,14 @@ export default {
   packs: [eslintRaiz],
   rules: {
     'eslint/no-empty':                     { goal: 0 },
+    'eslint/no-nested-ternary':            { goal: 0 },
     'eslint/no-useless-catch':             { goal: 0 },
     'eslint/object-curly-newline-imports': { goal: 0 },
   },
 };
 ```
 
-For count rules, `goal: 0` is the natural target — fewer violations is always better. Goal could be set to a non-zero number if you want to land the rule with a tolerance budget; the ratchet will tighten down toward zero from the seeded current.
+For count rules, `goal: 0` is the natural target — fewer violations is always better. Goal could be set to a non-zero number if you want to land the rule with a tolerance budget; the ratchet will tighten down toward zero from the seeded current. `eslint/no-nested-ternary` in particular is the kind of rule you may want to seed at the current count and let the ratchet tighten over time, rather than trying to fix every offender in one go.
 
 ## How the shim works
 
@@ -109,6 +111,7 @@ The `prepublishOnly` script gates publishing on a clean build + tests + lint, so
 src/
   lib/shim.ts                       shimEslintRule() — the wrapping helper
   rules/eslintNoEmpty.ts            shim for `no-empty`
+  rules/eslintNoNestedTernary.ts    shim for `no-nested-ternary`
   rules/eslintNoUselessCatch.ts     shim for `no-useless-catch`
   rules/eslintObjectCurlyNewline.ts shim for `object-curly-newline` (imports)
   index.ts                          pack export

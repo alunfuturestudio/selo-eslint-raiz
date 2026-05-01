@@ -4,6 +4,10 @@ All notable changes to `selo-eslint-raiz` are documented here. The format follow
 
 ## [Unreleased]
 
+### Added
+
+- `eslint/no-nested-ternary` — wraps core ESLint `no-nested-ternary`. Equivalent to Biome's `noNestedTernary`. Default goal is `0`; for retrofits, seed at the current violation count and let the ratchet tighten over time.
+
 ## [0.1.0] — 2026-04-29
 
 ### Changed
