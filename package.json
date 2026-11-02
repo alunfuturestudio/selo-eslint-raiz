@@ -1,6 +1,6 @@
 {
   "name": "selo-eslint-raiz",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "selo rule pack — three core ESLint rules wrapped for the selo contract (no-empty, no-useless-catch, object-curly-newline). Ships a shimEslintRule() helper so the same pattern can be applied to any other ESLint rule.",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,7 +27,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@guilhermesilveira/selo": "^0.1.0"
+    "@guilhermesilveira/selo": "^0.1.0 || ^0.2.0"
   },
   "dependencies": {
     "@typescript-eslint/parser": "^8.59.1",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@guilhermesilveira/selo": "github:guilhermesilveira/selo",
+    "@guilhermesilveira/selo": "git+https://github.com/alunfuturestudio/selo.git#b003ee2e054810a76345eee90577aa05a8a31757",
     "@types/node": "^22.7.0",
     "typescript": "^5.6.0",
     "typescript-eslint": "^8.59.1",
@@ -43,5 +43,9 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alunfuturestudio/selo-eslint-raiz.git"
   }
 }

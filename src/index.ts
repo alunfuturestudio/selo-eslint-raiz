@@ -11,7 +11,7 @@ const [eslintNoEmpty, eslintNoUselessCatch, eslintObjectCurlyNewline] = batchEsl
 
 export const seloEslintRaiz: SeloRulePack = {
   name: 'selo-eslint-raiz',
-  version: '0.0.1',
+  version: '0.2.0',
   rules: {
     'eslint/no-empty': eslintNoEmpty,
     'eslint/no-useless-catch': eslintNoUselessCatch,
