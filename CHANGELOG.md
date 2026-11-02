@@ -4,6 +4,10 @@ All notable changes to `selo-eslint-raiz` are documented here. The format follow
 
 ## [Unreleased]
 
+### Changed
+
+- Batch built-in rules in one ESLint verification per file, reuse compatible engine parse data, and conservatively skip impossible AST candidates. Keep standalone shims isolated and diagnostics unchanged. No cross-invocation cache.
+
 ## [0.1.0] — 2026-04-29
 
 ### Changed
