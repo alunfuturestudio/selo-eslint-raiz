@@ -1,7 +1,13 @@
 import type { SeloRulePack } from '@guilhermesilveira/selo';
-import { eslintNoEmpty } from './rules/eslintNoEmpty.js';
-import { eslintNoUselessCatch } from './rules/eslintNoUselessCatch.js';
-import { eslintObjectCurlyNewline } from './rules/eslintObjectCurlyNewline.js';
+import { eslintNoEmpty as isolatedeslintNoEmpty } from './rules/eslintNoEmpty.js';
+import { eslintNoUselessCatch as isolatedeslintNoUselessCatch } from './rules/eslintNoUselessCatch.js';
+import { eslintObjectCurlyNewline as isolatedeslintObjectCurlyNewline } from './rules/eslintObjectCurlyNewline.js';
+
+import { batchEslintRules } from './lib/shim.js';
+
+const [eslintNoEmpty, eslintNoUselessCatch, eslintObjectCurlyNewline] = batchEslintRules([
+  isolatedeslintNoEmpty, isolatedeslintNoUselessCatch, isolatedeslintObjectCurlyNewline,
+]) as [typeof isolatedeslintNoEmpty, typeof isolatedeslintNoUselessCatch, typeof isolatedeslintObjectCurlyNewline];
 
 export const seloEslintRaiz: SeloRulePack = {
   name: 'selo-eslint-raiz',

@@ -39,14 +39,16 @@ For count rules, `goal: 0` is the natural target — fewer violations is always 
 
 ## How the shim works
 
-Each rule in this pack is built by `shimEslintRule({...})`, which spins up an isolated ESLint `Linter`, configures *only* the wrapped rule, runs the file through it, and emits one selo measurement per violation. The mechanism in one paragraph:
+The exported built-in pack batches its independent rules into one ESLint verification
+per file, caching only diagnostic messages in a `WeakMap` for that invocation.
+Conservative AST eligibility checks skip verification for `no-empty` and
+`no-useless-catch` only when no node capable of triggering the rule exists.
+ESLint still owns options, inline directives, exact diagnostics and locations.
 
-1. selo's engine parses the file and hands the rule a `SeloFile` with `path`, `source`, and the parsed AST.
-2. The shim ignores the AST (re-parsing is cheap; ESLint will do it again with `@typescript-eslint/parser`) and calls `linter.verify(source, {...})` with a tiny flat config that loads the wrapped rule and its options.
-3. Each `LintMessage` whose `ruleId` matches the wrapped rule becomes a `SeloMeasurement` with `value: 1`, the line number, and the rendered ESLint message in `data.message`.
-4. selo's seal-message rendering takes over from there — the message in `data` flows into the rule's `seal` template at offender-listing time.
-
-Importantly, the shim does **not** load the host project's ESLint config. The wrapped rule runs in isolation with the options the shim authored. This keeps selo and ESLint deliberately decoupled — you don't have to keep two configs in sync, and the verdict is reproducible across machines.
+A compatible engine-prepared parse is reused when its parser version, source and
+JSX mode match. Older engines or incompatible metadata fall back to the original
+parser. The standalone `shimEslintRule()` helper remains isolated, and the host
+project's ESLint config is never loaded. No data is cached between invocations.
 
 ## Adding a new ESLint rule
 
